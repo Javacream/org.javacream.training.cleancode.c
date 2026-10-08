@@ -1,11 +1,11 @@
 # Qualitätsanalyse – Clean-Code-Kurs
 
-Erstellt: 2026-10-08T17:37:29+00:00
+Erstellt: 2026-10-08T17:57:19+00:00
 
 ## Vergleich der Blöcke
 
 | Block | Variante | C-Dateien | Funktionen | Summe NLOC (Funktionen) | Max. CCN | Max. Cognitive | Verschachtelung (heur.) | Max. Parameter | Cppcheck-Meldungen |
-|---|---|---:|---:|---:|---:|---:|---:|
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
 | 01 | clean | 1 | 2 | 16 | 2 | n/a | 1 | 2 | 0 |
 | 01 | dirty | 1 | 1 | 11 | 2 | n/a | 1 | 0 | 1 |
 | 02 | clean | 1 | 2 | 20 | 5 | n/a | 0 | 4 | 0 |
@@ -23,7 +23,7 @@ Erstellt: 2026-10-08T17:37:29+00:00
 | 08 | clean | 3 | 7 | 49 | 4 | n/a | 1 | 5 | 0 |
 | 08 | dirty | 3 | 4 | 41 | 7 | n/a | 2 | 5 | 0 |
 
-**Interpretation:** Cognitive Complexity wird nur ausgegeben, wenn sie vom Analyzer bereitgestellt wird (sonst n/a); die Verschachtelung ist eine vereinfachte, nicht normierte Klammer-Heuristik. NLOC zählt nichtleere Codezeilen innerhalb erkannter Funktionen, CCN ist die zyklomatische Komplexität. Die Maximalwerte gelten pro Funktion; die Funktionsanzahl kann sich zwischen Varianten unterscheiden. Weniger ist nicht automatisch besser. Cppcheck-Meldungen sind Prüfhinweise und müssen fachlich bewertet werden.
+**Interpretation:** Cognitive Complexity wird als n/a ausgegeben, sofern die verwendete Lizard-Version diese Metrik nicht direkt bereitstellt; die Verschachtelung ist eine vereinfachte, nicht normierte Klammer-Heuristik. NLOC zählt nichtleere Codezeilen innerhalb erkannter Funktionen, CCN ist die zyklomatische Komplexität. Die Maximalwerte gelten pro Funktion; die Funktionsanzahl kann sich zwischen Varianten unterscheiden. Weniger ist nicht automatisch besser. Cppcheck-Meldungen sind Prüfhinweise und müssen fachlich bewertet werden.
 
 ## Auffällige Funktionen
 
@@ -52,7 +52,7 @@ Erstellt: 2026-10-08T17:37:29+00:00
 
 ## Cppcheck-Befunde
 
-### 01 - Grundlagen von Clean Code und SoftwarequalitÔö£├▒t – dirty
+### 01 - Grundlagen von Clean Code und Softwarequalität – dirty
 - **style / knownConditionTrueFalse** – `main.c:8`: Condition 'r>300' is always true
 
 ### 03 - Namen, Datentypen und Ausdruckskraft – clean

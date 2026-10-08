@@ -48,8 +48,9 @@ def approximate_max_nesting(source):
 
 def analyze(root, block_filter):
     import lizard
-    # Die stabile Datei-API erkennt C anhand der Dateiendung.
-    # FileAnalyzer.__call__ erwartet dagegen Quelltext, keinen Dateipfad.
+    # Die öffentliche Lizard-Funktion übernimmt die Erkennung der C-Sprache.
+    # Die optionale Cognitive-Complexity-Erweiterung wird hier nicht erzwungen,
+    # da die FileAnalyzer-API versionsabhängig ist.
     records=[]
     for variant in ('dirty','clean'):
         for folder in sorted((root/variant).iterdir()):
@@ -76,19 +77,23 @@ def analyze(root, block_filter):
             records.append({'variant':variant,'block':folder.name,'files':len(sources),'functions':functions,'issues':issues,'nesting':max((approximate_max_nesting(source) for source in sources),default=0)})
     return records
 
+def display_block_name(name):
+    """Repariert bekannte fehlerhafte Verzeichnisnamen nur in der Ausgabe."""
+    return name.replace('SoftwarequalitÔö£├▒t', 'Softwarequalität')
+
 def report(records):
-    lines=['# Qualitätsanalyse – Clean-Code-Kurs','',f'Erstellt: {datetime.datetime.now().astimezone().isoformat(timespec="seconds")}', '', '## Vergleich der Blöcke','', '| Block | Variante | C-Dateien | Funktionen | Summe NLOC (Funktionen) | Max. CCN | Max. Cognitive | Verschachtelung (heur.) | Max. Parameter | Cppcheck-Meldungen |','|---|---|---:|---:|---:|---:|---:|---:|']
+    lines=['# Qualitätsanalyse – Clean-Code-Kurs','',f'Erstellt: {datetime.datetime.now().astimezone().isoformat(timespec="seconds")}', '', '## Vergleich der Blöcke','', '| Block | Variante | C-Dateien | Funktionen | Summe NLOC (Funktionen) | Max. CCN | Max. Cognitive | Verschachtelung (heur.) | Max. Parameter | Cppcheck-Meldungen |','|---|---|---:|---:|---:|---:|---:|---:|---:|---:|']
     for r in sorted(records,key=lambda x:(x['block'],x['variant'])):
         fs=r['functions']
         lines.append(f"| {r['block'].split(' - ')[0]} | {r['variant']} | {r['files']} | {len(fs)} | {sum(f['nloc'] for f in fs)} | {max((f['ccn'] for f in fs),default=0)} | {max((f['cognitive'] for f in fs if f['cognitive'] is not None),default='n/a')} | {r['nesting']} | {max((f['params'] for f in fs),default=0)} | {len(r['issues'])} |")
-    lines+=['','**Interpretation:** Cognitive Complexity wird nur ausgegeben, wenn sie vom Analyzer bereitgestellt wird (sonst n/a); die Verschachtelung ist eine vereinfachte, nicht normierte Klammer-Heuristik. NLOC zählt nichtleere Codezeilen innerhalb erkannter Funktionen, CCN ist die zyklomatische Komplexität. Die Maximalwerte gelten pro Funktion; die Funktionsanzahl kann sich zwischen Varianten unterscheiden. Weniger ist nicht automatisch besser. Cppcheck-Meldungen sind Prüfhinweise und müssen fachlich bewertet werden.','', '## Auffällige Funktionen','', '| Block | Variante | Funktion | Datei | NLOC | CCN | Cognitive | Parameter |','|---|---|---|---|---:|---:|---:|---:|']
+    lines+=['','**Interpretation:** Cognitive Complexity wird als n/a ausgegeben, sofern die verwendete Lizard-Version diese Metrik nicht direkt bereitstellt; die Verschachtelung ist eine vereinfachte, nicht normierte Klammer-Heuristik. NLOC zählt nichtleere Codezeilen innerhalb erkannter Funktionen, CCN ist die zyklomatische Komplexität. Die Maximalwerte gelten pro Funktion; die Funktionsanzahl kann sich zwischen Varianten unterscheiden. Weniger ist nicht automatisch besser. Cppcheck-Meldungen sind Prüfhinweise und müssen fachlich bewertet werden.','', '## Auffällige Funktionen','', '| Block | Variante | Funktion | Datei | NLOC | CCN | Cognitive | Parameter |','|---|---|---|---|---:|---:|---:|---:|']
     funcs=sorted(((r,f) for r in records for f in r['functions']),key=lambda rf:(-rf[1]['ccn'],-rf[1]['nloc']))[:20]
     for r,f in funcs:
         lines.append(f"| {r['block'].split(' - ')[0]} | {r['variant']} | `{f['name']}` | `{f['file']}` | {f['nloc']} | {f['ccn']} | {f['cognitive'] if f['cognitive'] is not None else 'n/a'} | {f['params']} |")
     lines+=['','## Cppcheck-Befunde','']
     for r in sorted(records,key=lambda x:(x['block'],x['variant'])):
         if not r['issues']:continue
-        lines.append(f"### {r['block']} – {r['variant']}")
+        lines.append(f"### {display_block_name(r['block'])} – {r['variant']}")
         for issue in r['issues']:
             lines.append(f"- **{issue['severity']} / {issue['id']}** – `{issue['file']}:{issue['line']}`: {issue['message']}")
         lines.append('')
@@ -107,7 +112,10 @@ def main():
         parser.error('Lizard fehlt: python3 -m pip install lizard')
     if not shutil.which('cppcheck'):
         parser.error('Cppcheck fehlt: apt-get install cppcheck')
-    records=analyze(ROOT,args.block)
+    try:
+        records=analyze(ROOT,args.block)
+    except RuntimeError as exc:
+        parser.error(str(exc))
     if not records:parser.error('Keine passenden C-Dateien gefunden')
     target=Path(args.output)
     if not target.is_absolute():target=ROOT/target
