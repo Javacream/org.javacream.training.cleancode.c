@@ -1,0 +1,13 @@
+# C build artifacts
+*.o
+*.obj
+*.out
+*.exe
+
+# VS Code C/C++ "Run C/C++ File" executables used in this training
+main
+app
+test
+
+# Build directories
+build/

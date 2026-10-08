@@ -1,0 +1,5 @@
+{
+  "C_Cpp.default.cStandard": "c90",
+  "C_Cpp.default.compilerPath": "/usr/bin/gcc",
+  "C_Cpp.errorSquiggles": "enabled"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Clean Code Training - C90",
+  "build": { "dockerfile": "Dockerfile" },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-vscode.cpptools"],
+      "settings": {
+        "C_Cpp.default.cStandard": "c90",
+        "C_Cpp.default.compilerPath": "/usr/bin/gcc"
+      }
+    }
+  },
+  "remoteUser": "vscode"
+}
