@@ -62,7 +62,7 @@ def analyze(root, block_filter):
             for source in sources:
                 analysis=lizard.analyze_file(str(source))
                 for f in analysis.function_list:
-                    functions.append({'name':f.name,'file':source.name,'nloc':f.nloc,'ccn':f.cyclomatic_complexity,'params':f.parameter_count,'cognitive':getattr(f,'cognitive_complexity',None)})
+                    functions.append({'name':f.name,'file':source.name,'nloc':f.nloc,'ccn':f.cyclomatic_complexity,'params':f.parameter_count})
             result=execute(['cppcheck','--enable=warning,style,performance,portability','--xml','--xml-version=2','--quiet',*[str(p) for p in sources]])
             issues=[]
             try:
@@ -82,14 +82,14 @@ def display_block_name(name):
     return name.replace('SoftwarequalitÔö£├▒t', 'Softwarequalität')
 
 def report(records):
-    lines=['# Qualitätsanalyse – Clean-Code-Kurs','',f'Erstellt: {datetime.datetime.now().astimezone().isoformat(timespec="seconds")}', '', '## Vergleich der Blöcke','', '| Block | Variante | C-Dateien | Funktionen | Summe NLOC (Funktionen) | Max. CCN | Max. Cognitive | Verschachtelung (heur.) | Max. Parameter | Cppcheck-Meldungen |','|---|---|---:|---:|---:|---:|---:|---:|---:|---:|']
+    lines=['# Qualitätsanalyse – Clean-Code-Kurs','',f'Erstellt: {datetime.datetime.now().astimezone().isoformat(timespec="seconds")}', '', '## Vergleich der Blöcke','', '| Block | Variante | C-Dateien | Funktionen | Summe NLOC (Funktionen) | Max. CCN | Verschachtelung (heur.) | Max. Parameter | Cppcheck-Meldungen |','|---|---|---:|---:|---:|---:|---:|---:|---:|']
     for r in sorted(records,key=lambda x:(x['block'],x['variant'])):
         fs=r['functions']
-        lines.append(f"| {r['block'].split(' - ')[0]} | {r['variant']} | {r['files']} | {len(fs)} | {sum(f['nloc'] for f in fs)} | {max((f['ccn'] for f in fs),default=0)} | {max((f['cognitive'] for f in fs if f['cognitive'] is not None),default='n/a')} | {r['nesting']} | {max((f['params'] for f in fs),default=0)} | {len(r['issues'])} |")
-    lines+=['','**Interpretation:** Cognitive Complexity wird als n/a ausgegeben, sofern die verwendete Lizard-Version diese Metrik nicht direkt bereitstellt; die Verschachtelung ist eine vereinfachte, nicht normierte Klammer-Heuristik. NLOC zählt nichtleere Codezeilen innerhalb erkannter Funktionen, CCN ist die zyklomatische Komplexität. Die Maximalwerte gelten pro Funktion; die Funktionsanzahl kann sich zwischen Varianten unterscheiden. Weniger ist nicht automatisch besser. Cppcheck-Meldungen sind Prüfhinweise und müssen fachlich bewertet werden.','', '## Auffällige Funktionen','', '| Block | Variante | Funktion | Datei | NLOC | CCN | Cognitive | Parameter |','|---|---|---|---|---:|---:|---:|---:|']
-    funcs=sorted(((r,f) for r in records for f in r['functions']),key=lambda rf:(-rf[1]['ccn'],-rf[1]['nloc']))[:20]
+        lines.append(f"| {r['block'].split(' - ')[0]} | {r['variant']} | {r['files']} | {len(fs)} | {sum(f['nloc'] for f in fs)} | {max((f['ccn'] for f in fs),default=0)} | {r['nesting']} | {max((f['params'] for f in fs),default=0)} | {len(r['issues'])} |")
+    lines+=['','**Interpretation:** Die Verschachtelung ist eine vereinfachte, nicht normierte Klammer-Heuristik. NLOC zählt nichtleere Codezeilen innerhalb erkannter Funktionen, CCN ist die zyklomatische Komplexität. Die Maximalwerte gelten pro Funktion; die Funktionsanzahl kann sich zwischen Varianten unterscheiden. Weniger ist nicht automatisch besser. Cppcheck-Meldungen sind Prüfhinweise und müssen fachlich bewertet werden.','', '## Funktionen mit der höchsten zyklomatischen Komplexität','', '| Block | Variante | Funktion | Datei | NLOC | CCN | Parameter |','|---|---|---|---|---:|---:|---:|']
+    funcs=sorted(((r,f) for r in records for f in r['functions']),key=lambda rf:(-rf[1]['ccn'],-rf[1]['nloc']))[:10]
     for r,f in funcs:
-        lines.append(f"| {r['block'].split(' - ')[0]} | {r['variant']} | `{f['name']}` | `{f['file']}` | {f['nloc']} | {f['ccn']} | {f['cognitive'] if f['cognitive'] is not None else 'n/a'} | {f['params']} |")
+        lines.append(f"| {r['block'].split(' - ')[0]} | {r['variant']} | `{f['name']}` | `{f['file']}` | {f['nloc']} | {f['ccn']} | {f['params']} |")
     lines+=['','## Cppcheck-Befunde','']
     for r in sorted(records,key=lambda x:(x['block'],x['variant'])):
         if not r['issues']:continue
