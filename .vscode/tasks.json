@@ -1,0 +1,116 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Static Analysis: cppcheck active file",
+      "type": "shell",
+      "command": "cppcheck --enable=warning,style,performance,portability --std=c89 \"${file}\"",
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Metrics: analyze all blocks",
+      "type": "shell",
+      "command": "python3 analyze.py --output quality-report.md",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Metrics: analyze block 06",
+      "type": "shell",
+      "command": "python3 analyze.py --block 06 --output blocks/06-metriken/quality-report-block06.md",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Metrics: check installed tools",
+      "type": "shell",
+      "command": "gcc --version | head -n 1 && cppcheck --version && lizard --version",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Make: Build",
+      "type": "shell",
+      "command": "make",
+      "args": [],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "detail": "Run Makefile in the directory of the active file",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Make: Run",
+      "type": "shell",
+      "command": "make",
+      "args": [
+        "run"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "detail": "Run Makefile in the directory of the active file"
+    },
+    {
+      "label": "Make: Clean",
+      "type": "shell",
+      "command": "make",
+      "args": [
+        "clean"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [],
+      "detail": "Run Makefile in the directory of the active file"
+    },
+    {
+      "label": "Make: Test",
+      "type": "shell",
+      "command": "make",
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "detail": "Run make test in the directory of the active example",
+      "args": [
+        "test"
+      ]
+    },
+    {
+      "label": "Make: Test All",
+      "type": "shell",
+      "command": "make",
+      "args": [
+        "test"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "detail": "Test all block and refactoring examples from the project root"
+    }
+  ]
+}
