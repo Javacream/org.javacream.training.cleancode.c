@@ -48,13 +48,8 @@ def approximate_max_nesting(source):
 
 def analyze(root, block_filter):
     import lizard
-    try:
-        from lizard_ext.lizardcognitive import LizardExtension as CognitiveExtension
-    except ImportError:
-        CognitiveExtension = None
-    analyzer = lizard.FileAnalyzer(
-        [CognitiveExtension()] if CognitiveExtension else []
-    )
+    # Die stabile Datei-API erkennt C anhand der Dateiendung.
+    # FileAnalyzer.__call__ erwartet dagegen Quelltext, keinen Dateipfad.
     records=[]
     for variant in ('dirty','clean'):
         for folder in sorted((root/variant).iterdir()):
@@ -64,7 +59,7 @@ def analyze(root, block_filter):
             if not sources: continue
             functions=[]
             for source in sources:
-                analysis=analyzer(str(source))
+                analysis=lizard.analyze_file(str(source))
                 for f in analysis.function_list:
                     functions.append({'name':f.name,'file':source.name,'nloc':f.nloc,'ccn':f.cyclomatic_complexity,'params':f.parameter_count,'cognitive':getattr(f,'cognitive_complexity',None)})
             result=execute(['cppcheck','--enable=warning,style,performance,portability','--xml','--xml-version=2','--quiet',*[str(p) for p in sources]])
@@ -86,7 +81,7 @@ def report(records):
     for r in sorted(records,key=lambda x:(x['block'],x['variant'])):
         fs=r['functions']
         lines.append(f"| {r['block'].split(' - ')[0]} | {r['variant']} | {r['files']} | {len(fs)} | {sum(f['nloc'] for f in fs)} | {max((f['ccn'] for f in fs),default=0)} | {max((f['cognitive'] for f in fs if f['cognitive'] is not None),default='n/a')} | {r['nesting']} | {max((f['params'] for f in fs),default=0)} | {len(r['issues'])} |")
-    lines+=['','**Interpretation:** Cognitive Complexity stammt aus der Lizard-Erweiterung; die Verschachtelung ist eine vereinfachte, nicht normierte Klammer-Heuristik. NLOC zählt nichtleere Codezeilen innerhalb erkannter Funktionen, CCN ist die zyklomatische Komplexität. Die Maximalwerte gelten pro Funktion; die Funktionsanzahl kann sich zwischen Varianten unterscheiden. Weniger ist nicht automatisch besser. Cppcheck-Meldungen sind Prüfhinweise und müssen fachlich bewertet werden.','', '## Auffällige Funktionen','', '| Block | Variante | Funktion | Datei | NLOC | CCN | Cognitive | Parameter |','|---|---|---|---|---:|---:|---:|---:|']
+    lines+=['','**Interpretation:** Cognitive Complexity wird nur ausgegeben, wenn sie vom Analyzer bereitgestellt wird (sonst n/a); die Verschachtelung ist eine vereinfachte, nicht normierte Klammer-Heuristik. NLOC zählt nichtleere Codezeilen innerhalb erkannter Funktionen, CCN ist die zyklomatische Komplexität. Die Maximalwerte gelten pro Funktion; die Funktionsanzahl kann sich zwischen Varianten unterscheiden. Weniger ist nicht automatisch besser. Cppcheck-Meldungen sind Prüfhinweise und müssen fachlich bewertet werden.','', '## Auffällige Funktionen','', '| Block | Variante | Funktion | Datei | NLOC | CCN | Cognitive | Parameter |','|---|---|---|---|---:|---:|---:|---:|']
     funcs=sorted(((r,f) for r in records for f in r['functions']),key=lambda rf:(-rf[1]['ccn'],-rf[1]['nloc']))[:20]
     for r,f in funcs:
         lines.append(f"| {r['block'].split(' - ')[0]} | {r['variant']} | `{f['name']}` | `{f['file']}` | {f['nloc']} | {f['ccn']} | {f['cognitive'] if f['cognitive'] is not None else 'n/a'} | {f['params']} |")

@@ -1,34 +1,54 @@
 # Qualitätsanalyse – Clean-Code-Kurs
 
-Erstellt: 2026-10-08T17:31:22+00:00
+Erstellt: 2026-10-08T17:37:29+00:00
 
 ## Vergleich der Blöcke
 
 | Block | Variante | C-Dateien | Funktionen | Summe NLOC (Funktionen) | Max. CCN | Max. Cognitive | Verschachtelung (heur.) | Max. Parameter | Cppcheck-Meldungen |
 |---|---|---:|---:|---:|---:|---:|---:|
-| 01 | clean | 1 | 0 | 0 | 0 | n/a | 1 | 0 | 0 |
-| 01 | dirty | 1 | 0 | 0 | 0 | n/a | 1 | 0 | 1 |
-| 02 | clean | 1 | 0 | 0 | 0 | n/a | 0 | 0 | 0 |
-| 02 | dirty | 1 | 0 | 0 | 0 | n/a | 0 | 0 | 0 |
-| 03 | clean | 1 | 0 | 0 | 0 | n/a | 1 | 0 | 1 |
-| 03 | dirty | 1 | 0 | 0 | 0 | n/a | 1 | 0 | 1 |
-| 04 | clean | 1 | 0 | 0 | 0 | n/a | 1 | 0 | 0 |
-| 04 | dirty | 1 | 0 | 0 | 0 | n/a | 1 | 0 | 0 |
-| 05 | clean | 1 | 0 | 0 | 0 | n/a | 1 | 0 | 0 |
-| 05 | dirty | 1 | 0 | 0 | 0 | n/a | 3 | 0 | 0 |
-| 06 | clean | 1 | 0 | 0 | 0 | n/a | 1 | 0 | 0 |
-| 06 | dirty | 1 | 0 | 0 | 0 | n/a | 2 | 0 | 0 |
-| 07 | clean | 3 | 0 | 0 | 0 | n/a | 1 | 0 | 0 |
-| 07 | dirty | 1 | 0 | 0 | 0 | n/a | 0 | 0 | 0 |
-| 08 | clean | 3 | 0 | 0 | 0 | n/a | 1 | 0 | 0 |
-| 08 | dirty | 3 | 0 | 0 | 0 | n/a | 2 | 0 | 0 |
+| 01 | clean | 1 | 2 | 16 | 2 | n/a | 1 | 2 | 0 |
+| 01 | dirty | 1 | 1 | 11 | 2 | n/a | 1 | 0 | 1 |
+| 02 | clean | 1 | 2 | 20 | 5 | n/a | 0 | 4 | 0 |
+| 02 | dirty | 1 | 2 | 23 | 6 | n/a | 0 | 4 | 0 |
+| 03 | clean | 1 | 1 | 26 | 16 | n/a | 1 | 1 | 1 |
+| 03 | dirty | 1 | 1 | 16 | 16 | n/a | 1 | 1 | 1 |
+| 04 | clean | 1 | 5 | 24 | 2 | n/a | 1 | 2 | 0 |
+| 04 | dirty | 1 | 2 | 16 | 5 | n/a | 1 | 6 | 0 |
+| 05 | clean | 1 | 2 | 15 | 8 | n/a | 1 | 4 | 0 |
+| 05 | dirty | 1 | 2 | 20 | 8 | n/a | 3 | 4 | 0 |
+| 06 | clean | 1 | 4 | 31 | 8 | n/a | 1 | 4 | 0 |
+| 06 | dirty | 1 | 3 | 29 | 11 | n/a | 2 | 4 | 0 |
+| 07 | clean | 3 | 4 | 33 | 4 | n/a | 1 | 3 | 0 |
+| 07 | dirty | 1 | 2 | 11 | 1 | n/a | 0 | 1 | 0 |
+| 08 | clean | 3 | 7 | 49 | 4 | n/a | 1 | 5 | 0 |
+| 08 | dirty | 3 | 4 | 41 | 7 | n/a | 2 | 5 | 0 |
 
-**Interpretation:** Cognitive Complexity stammt aus der Lizard-Erweiterung; die Verschachtelung ist eine vereinfachte, nicht normierte Klammer-Heuristik. NLOC zählt nichtleere Codezeilen innerhalb erkannter Funktionen, CCN ist die zyklomatische Komplexität. Die Maximalwerte gelten pro Funktion; die Funktionsanzahl kann sich zwischen Varianten unterscheiden. Weniger ist nicht automatisch besser. Cppcheck-Meldungen sind Prüfhinweise und müssen fachlich bewertet werden.
+**Interpretation:** Cognitive Complexity wird nur ausgegeben, wenn sie vom Analyzer bereitgestellt wird (sonst n/a); die Verschachtelung ist eine vereinfachte, nicht normierte Klammer-Heuristik. NLOC zählt nichtleere Codezeilen innerhalb erkannter Funktionen, CCN ist die zyklomatische Komplexität. Die Maximalwerte gelten pro Funktion; die Funktionsanzahl kann sich zwischen Varianten unterscheiden. Weniger ist nicht automatisch besser. Cppcheck-Meldungen sind Prüfhinweise und müssen fachlich bewertet werden.
 
 ## Auffällige Funktionen
 
 | Block | Variante | Funktion | Datei | NLOC | CCN | Cognitive | Parameter |
 |---|---|---|---|---:|---:|---:|---:|
+| 03 | clean | `main` | `main.c` | 26 | 16 | n/a | 1 |
+| 03 | dirty | `main` | `main.c` | 16 | 16 | n/a | 1 |
+| 06 | dirty | `risk_score` | `main.c` | 17 | 11 | n/a | 4 |
+| 05 | dirty | `shipping_cost` | `main.c` | 15 | 8 | n/a | 4 |
+| 06 | clean | `incident_score` | `main.c` | 13 | 8 | n/a | 3 |
+| 05 | clean | `shipping_cost` | `main.c` | 10 | 8 | n/a | 4 |
+| 08 | dirty | `calculate_order_total` | `logic.c` | 13 | 7 | n/a | 5 |
+| 02 | dirty | `process` | `main.c` | 17 | 6 | n/a | 4 |
+| 02 | clean | `process` | `main.c` | 14 | 5 | n/a | 4 |
+| 04 | dirty | `process_order` | `main.c` | 11 | 5 | n/a | 6 |
+| 08 | clean | `calculate_order_total` | `logic.c` | 9 | 4 | n/a | 5 |
+| 06 | dirty | `category` | `main.c` | 7 | 4 | n/a | 1 |
+| 06 | clean | `category` | `main.c` | 7 | 4 | n/a | 1 |
+| 06 | clean | `risk_score` | `main.c` | 6 | 4 | n/a | 4 |
+| 07 | clean | `calculate_gross_price` | `logic.c` | 5 | 4 | n/a | 2 |
+| 07 | clean | `main` | `test.c` | 17 | 2 | n/a | 0 |
+| 08 | dirty | `main` | `test.c` | 14 | 2 | n/a | 0 |
+| 08 | clean | `main` | `test.c` | 14 | 2 | n/a | 0 |
+| 01 | dirty | `main` | `main.c` | 11 | 2 | n/a | 0 |
+| 08 | dirty | `expect` | `test.c` | 9 | 2 | n/a | 3 |
 
 ## Cppcheck-Befunde
 
