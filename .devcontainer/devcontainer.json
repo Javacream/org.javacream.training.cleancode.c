@@ -1,12 +1,18 @@
 {
   "name": "Clean Code Training - C90",
-  "build": { "dockerfile": "Dockerfile" },
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "customizations": {
     "vscode": {
-      "extensions": ["ms-vscode.cpptools"],
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-python.python"
+      ],
       "settings": {
         "C_Cpp.default.cStandard": "c90",
-        "C_Cpp.default.compilerPath": "/usr/bin/gcc"
+        "C_Cpp.default.compilerPath": "/usr/bin/gcc",
+        "python.defaultInterpreterPath": "/opt/metrics-venv/bin/python3"
       }
     }
   },

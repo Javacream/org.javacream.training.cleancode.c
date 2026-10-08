@@ -1,20 +1,18 @@
 #include <stdio.h>
-static int incident_score(int age, int incidents, int overdue)
+int risk_score(int age, int incidents, int overdue, int verified)
 {
     int score = 0;
     if (age < 21) {
-        score = 2;
-        if (incidents > 0) score += 3 + (overdue ? 2 : 0);
-        else if (overdue) score += 1;
+        score += 2;
+        if (incidents > 0) {
+            score += 3;
+            if (overdue) score += 2;
+        } else if (overdue) score += 1;
     } else {
-        score = incidents > 2 ? 3 : (incidents > 0 ? 1 : 0);
+        if (incidents > 2) score += 3;
+        else if (incidents > 0) score += 1;
         if (overdue) score += 2;
     }
-    return score;
-}
-int risk_score(int age, int incidents, int overdue, int verified)
-{
-    int score = incident_score(age, incidents, overdue);
     if (!verified && (score > 2 || incidents > 1)) score += 2;
     return score;
 }

@@ -10,7 +10,7 @@
 
 1. Das Hauptverzeichnis `clean-code-training` in Visual Studio Code öffnen.
 2. `Dev Containers: Reopen in Container` ausführen.
-3. Eine C-Datei in `original/` oder `clean/` öffnen.
+3. Eine C-Datei in `dirty/` oder `clean/` öffnen.
 4. Über die Start-Schaltfläche oben rechts im Editor **Debug C/C++ File** wählen, um das Programm im Debugger auszuführen.
 5. Alternativ **Run C/C++ File** verwenden und eine eventuell offen gebliebene Debug-Session anschließend manuell beenden.
 
@@ -44,7 +44,7 @@ Für dieses Verhalten sind keine weiteren Konfigurationsänderungen vorgesehen.
 
 ## Verzeichnisprinzip
 
-`original/` enthält die Ausgangsversionen.
+`dirty/` enthält die Ausgangsversionen.
 
 `clean/` enthält die überarbeiteten Versionen.
 

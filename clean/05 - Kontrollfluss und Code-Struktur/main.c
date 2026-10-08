@@ -1,18 +1,17 @@
 #include <stdio.h>
-
-int shipping_cost(int weight, int express, int international, int blocked)
+enum { PICKUP = 0, STANDARD = 1, EXPRESS = 2 };
+int shipping_cost(int weight, int mode, int international, int blocked)
 {
-    int cost;
-    if (blocked) return -1;
-    if (weight <= 0) return -1;
-
-    cost = international ? 20 : 5;
-    if (express) cost += international ? 15 : 10;
-    return cost;
+    if (blocked || weight <= 0) return -1;
+    switch (mode) {
+        case PICKUP: return 0;
+        case STANDARD: return international ? 20 : 5;
+        case EXPRESS: return international ? 35 : 15;
+        default: return -1;
+    }
 }
-
 int main(void)
 {
-    printf("%d\n", shipping_cost(10, 1, 0, 0));
+    printf("%d\n", shipping_cost(10, EXPRESS, 0, 0));
     return 0;
 }

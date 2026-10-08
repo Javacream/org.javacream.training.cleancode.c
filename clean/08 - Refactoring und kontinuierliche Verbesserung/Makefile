@@ -1,15 +1,17 @@
 CC = cc
-CFLAGS = -std=c90 -Wall -Wextra -pedantic
+CFLAGS = -std=c90 -Wall -Wextra -pedantic -g
 
+.PHONY: all clean check
 all: app tests
 
-app: main.c
-	$(CC) $(CFLAGS) -o app main.c
+app: main.c logic.c logic.h
+	$(CC) $(CFLAGS) -o $@ main.c logic.c
 
-tests: main.c test.c
-	$(CC) $(CFLAGS) -Dmain=app_main -c main.c -o main_test.o
-	$(CC) $(CFLAGS) -c test.c -o test.o
-	$(CC) -o tests main_test.o test.o
+tests: test.c logic.c logic.h
+	$(CC) $(CFLAGS) -o $@ test.c logic.c
+
+check: tests
+	./tests
 
 clean:
 	rm -f app tests *.o

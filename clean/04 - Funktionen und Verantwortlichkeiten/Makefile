@@ -1,11 +1,14 @@
 CC = cc
-CFLAGS = -std=c90 -Wall -Wextra -pedantic
-TARGET = app
+CFLAGS = -std=c90 -Wall -Wextra -pedantic -g
 
-all: $(TARGET)
+.PHONY: all clean check
+all: app
 
-$(TARGET): main.c
-	$(CC) $(CFLAGS) -o $(TARGET) main.c
+app: main.c
+	$(CC) $(CFLAGS) -o $@ main.c
+
+check: app
+	./app
 
 clean:
-	rm -f $(TARGET)
+	rm -f app tests *.o

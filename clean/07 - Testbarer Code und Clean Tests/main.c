@@ -1,13 +1,7 @@
 #include <stdio.h>
-
-int calculate_gross_price(int net, int tax_rate)
-{
-    return net + net * tax_rate / 100;
-}
-
+#include "logic.h"
 int main(void)
 {
-    int gross = calculate_gross_price(100, 19);
-    printf("Calculated: %d\n", gross);
+    printf("Calculated: %d\n", calculate_gross_price(100, 19));
     return 0;
 }

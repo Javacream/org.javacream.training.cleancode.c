@@ -1,32 +1,26 @@
 #include <stdio.h>
-
-static int calculate_total(int price, int quantity)
+typedef struct { const char *customer; int unit_price; int quantity; int premium; int shipping_fee; } Order;
+static int is_valid_order(const Order *order) { return order->quantity > 0; }
+static int calculate_total(const Order *order)
 {
-    return price * quantity;
+    int total = order->unit_price * order->quantity;
+    if (order->premium) total -= total / 10;
+    return total + order->shipping_fee;
 }
-
-static int apply_premium_discount(int total, int premium)
+static void print_receipt(const Order *order, int total)
 {
-    if (premium) return total - total / 10;
-    return total;
-}
-
-static void print_order(const char *customer, int total)
-{
-    printf("Customer: %s\n", customer);
+    printf("Customer: %s\n", order->customer);
     printf("Total: %d\n", total);
     if (total > 500) printf("Large order\n");
 }
-
-static void process_order(int price, int quantity, const char *customer, int premium)
+static void process_order(const Order *order)
 {
-    int total = calculate_total(price, quantity);
-    total = apply_premium_discount(total, premium);
-    print_order(customer, total);
+    if (!is_valid_order(order)) { printf("Invalid quantity\n"); return; }
+    print_receipt(order, calculate_total(order));
 }
-
 int main(void)
 {
-    process_order(120, 5, "Miller", 1);
+    Order order = { "Miller", 120, 5, 1, 10 };
+    process_order(&order);
     return 0;
 }

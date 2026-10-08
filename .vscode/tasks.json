@@ -1,41 +1,68 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "type": "cppbuild",
-            "label": "C/C++: gcc build active file",
-            "command": "/usr/bin/gcc",
-            "args": [
-                "-fdiagnostics-color=always",
-                "-std=c90",
-                "-pedantic",
-                "-Wall",
-                "-Wextra",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
-            ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "C90 build using GCC"
-        },
-        {
-            "label": "Static Analysis: cppcheck active file",
-            "type": "shell",
-            "command": "cppcheck --enable=warning,style,performance,portability --std=c89 \"${file}\"",
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": []
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "C/C++: gcc build active file",
+      "command": "/usr/bin/gcc",
+      "args": [
+        "-fdiagnostics-color=always",
+        "-std=c90",
+        "-pedantic",
+        "-Wall",
+        "-Wextra",
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "C90 build using GCC"
+    },
+    {
+      "label": "Static Analysis: cppcheck active file",
+      "type": "shell",
+      "command": "cppcheck --enable=warning,style,performance,portability --std=c89 \"${file}\"",
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Metrics: analyze all blocks",
+      "type": "shell",
+      "command": "python3 analyze.py --output quality-report.md",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Metrics: analyze block 06",
+      "type": "shell",
+      "command": "python3 analyze.py --block 06 --output resources/quality-report-block06.md",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Metrics: check installed tools",
+      "type": "shell",
+      "command": "gcc --version | head -n 1 && cppcheck --version && python3 -m pip show lizard | grep Version",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    }
+  ]
 }
