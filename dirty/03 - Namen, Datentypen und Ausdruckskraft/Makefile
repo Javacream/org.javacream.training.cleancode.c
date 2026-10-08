@@ -8,7 +8,7 @@ app: main.c
 	$(CC) $(CFLAGS) -o $@ main.c
 
 check: app
-	./app
+	./app 2 1 0 3
 
 clean:
 	rm -f app tests *.o

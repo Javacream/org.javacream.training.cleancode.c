@@ -77,3 +77,7 @@ Lizard wird in `/opt/metrics-venv` installiert; dessen Python liegt im `PATH`.
 Über **Terminal → Run Task** stehen die Aufgaben `Metrics: analyze all blocks`,
 `Metrics: analyze block 06` und `Metrics: check installed tools` bereit.
 Die Analyseberichte werden erst bei Ausführung erzeugt.
+
+### Ergänzungen zur Qualitätsbewertung
+
+`analyze.py` zeigt zusätzlich Cognitive Complexity (Lizard-Erweiterung) und eine als **Heuristik** gekennzeichnete Verschachtelungstiefe. In Block 07 liefert `make coverage` (nur `clean`) einen `gcov`-Bericht. Die Dirty-Variante hat dort keine Testsuite; es wird kein vergleichbarer Coverage-Wert behauptet.

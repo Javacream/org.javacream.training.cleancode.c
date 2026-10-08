@@ -15,3 +15,7 @@ Testen Sie alle Versandarten für Inland/Ausland sowie gesperrte und ungültige 
 ## Reflexion
 
 Welche Verbesserung gehört genau in diesen Block? Welche anderen Verbesserungen würden einen späteren Lernschwerpunkt vorwegnehmen?
+
+## Metrikdiskussion
+
+Die zyklomatische Komplexität kann bei Guard Clauses unverändert bleiben. Für die Bewertung der Lesbarkeit zusätzlich Cognitive Complexity und die **heuristisch** ermittelte Verschachtelung im Qualitätsbericht betrachten. Letztere ist keine präzise Parser-Metrik.

@@ -15,3 +15,15 @@ Führen Sie `make check` in clean aus. Ergänzen Sie einen Test und begründen S
 ## Reflexion
 
 Welche Verbesserung gehört genau in diesen Block? Welche anderen Verbesserungen würden einen späteren Lernschwerpunkt vorwegnehmen?
+
+## Tests und Testabdeckung
+
+```sh
+cd "clean/07 - Testbarer Code und Clean Tests"
+make check
+make coverage
+```
+
+`make coverage` kompiliert eine instrumentierte Testanwendung und erzeugt mit `gcov` einen Bericht zur Ausführung von Zeilen und Zweigen in `logic.c`. Die Dirty-Variante besitzt bewusst keine Testsuite; sie erhält daher **keinen künstlichen Coverage-Wert**. Coverage ist keine Aussage über Testqualität.
+
+Diskutieren Sie Grenzwerte, ungültige Eingaben und die Aussagekraft der Assertions.

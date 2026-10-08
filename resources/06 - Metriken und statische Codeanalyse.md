@@ -6,7 +6,7 @@ Quantitative Metriken und statische Analysebefunde erheben, interpretieren und k
 
 ## Werkzeuge
 
-- **Lizard:** NLOC (nichtleere Codezeilen je Funktion), zyklomatische Komplexität (CCN), Parameteranzahl.
+- **Lizard:** NLOC (nichtleere Codezeilen je Funktion), zyklomatische Komplexität (CCN), Cognitive Complexity (Erweiterung), Parameteranzahl. Zusätzlich berechnet das Kursskript eine ausdrücklich **heuristische** Verschachtelungstiefe.
 - **Cppcheck:** Hinweise auf potenzielle Fehler und problematische C-Konstrukte.
 
 Die Werkzeuge sind in der Devcontainer-Umgebung installiert.
@@ -40,3 +40,7 @@ Der Markdown-Bericht vergleicht `dirty` und `clean`, listet Funktionen nach Komp
 ## Grenzen
 
 Der Bericht ist **kein Qualitätsscore**. Weder Architekturentscheidungen noch semantische Verständlichkeit oder Testqualität lassen sich daraus zuverlässig ableiten. Compilerwarnungen, Tests und Reviews sind ergänzend erforderlich.
+
+## Interpretation auf Funktionsebene
+
+Vergleichen Sie nicht nur die maximalen Werte pro Block, sondern einzelne Funktionen. Eine Aufteilung in mehrere Funktionen kann den Maximalwert senken, ohne die fachliche Komplexität zu beseitigen. Diskutieren Sie ausdrücklich den Fall Block 05: gleiche CCN, möglicherweise geringere kognitive Belastung.
