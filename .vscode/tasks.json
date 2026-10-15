@@ -63,6 +63,47 @@
         "cwd": "${workspaceFolder}"
       },
       "problemMatcher": []
+    },
+    {
+      "label": "Make: Build",
+      "type": "shell",
+      "command": "make",
+      "args": [],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "detail": "Run Makefile in the directory of the active file"
+    },
+    {
+      "label": "Make: Run",
+      "type": "shell",
+      "command": "make",
+      "args": [
+        "run"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "detail": "Run Makefile in the directory of the active file"
+    },
+    {
+      "label": "Make: Clean",
+      "type": "shell",
+      "command": "make",
+      "args": [
+        "clean"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [],
+      "detail": "Run Makefile in the directory of the active file"
     }
   ]
 }
