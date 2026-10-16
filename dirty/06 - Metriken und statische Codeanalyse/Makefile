@@ -15,3 +15,7 @@ clean:
 
 metrics:
 	python3 ../../analyze.py --block 06 --output resources/quality-report-block06.md
+
+# Einheitlicher Test-Einstieg fuer VS Code und die Projektwurzel.
+.PHONY: test
+test: check

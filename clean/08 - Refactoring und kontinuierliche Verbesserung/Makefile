@@ -15,3 +15,7 @@ check: tests
 
 clean:
 	rm -f app tests *.o
+
+# Einheitlicher Test-Einstieg fuer VS Code und die Projektwurzel.
+.PHONY: test
+test: check

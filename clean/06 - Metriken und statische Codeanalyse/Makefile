@@ -20,3 +20,7 @@ compare: test_comparison.c main.c alternative.c
 	$(CC) $(CFLAGS) -o comparison-tests test_comparison.c
 	./comparison-tests
 	rm -f comparison-tests
+
+# Einheitlicher Test-Einstieg fuer VS Code und die Projektwurzel.
+.PHONY: test
+test: check

@@ -85,14 +85,32 @@
     {
       "label": "Make: Test",
       "type": "shell",
-      "command": "make check",
+      "command": "make",
       "options": {
         "cwd": "${fileDirname}"
       },
       "problemMatcher": [
         "$gcc"
       ],
-      "detail": "Run check target for the active example"
+      "detail": "Run make test in the directory of the active example",
+      "args": [
+        "test"
+      ]
+    },
+    {
+      "label": "Make: Test All",
+      "type": "shell",
+      "command": "make",
+      "args": [
+        "test"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "detail": "Test all dirty, clean and refactoring examples from the project root"
     }
   ]
 }

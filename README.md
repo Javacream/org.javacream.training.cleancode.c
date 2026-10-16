@@ -88,3 +88,8 @@ Die Analyseberichte werden erst bei Ausführung erzeugt.
 - [Code Smells und Refactoring-Techniken](CODE-SMELL-REFACTORING-MATRIX.md)
 - [Umgesetzte Maßnahmen A und B](AENDERUNGEN-A-B.md)
 - [Refactoring-Übungen](refactoring/README.md)
+
+
+## Tests in Visual Studio Code
+
+Die Task **Make: Test** fuehrt `make test` im Verzeichnis der aktuell geoeffneten Datei aus. Fuer alle Beispiele gibt es nun ein `test`-Target (bei den Clean-Code-Bloecken als Alias fuer `check`). Die Task **Make: Test All** startet `make test` im Projektwurzelverzeichnis und prueft saemtliche `dirty`-, `clean`- und Refactoring-Beispiele. Alternativ kann `make test` direkt im Terminal an der Projektwurzel aufgerufen werden.

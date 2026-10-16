@@ -21,3 +21,7 @@ coverage:
 
 clean:
 	rm -f app tests tests-coverage *.o *.gcda *.gcno *.gcov
+
+# Einheitlicher Test-Einstieg fuer VS Code und die Projektwurzel.
+.PHONY: test
+test: check
