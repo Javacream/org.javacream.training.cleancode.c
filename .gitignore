@@ -11,3 +11,6 @@ test
 
 # Build directories
 build/
+
+# Generated unit-test executables (all subdirectories)
+test_runner
