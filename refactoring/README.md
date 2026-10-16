@@ -43,3 +43,7 @@ Die Beispiele sind didaktisch reduziert, keine produktionsfertigen Bibliotheken.
 ## Sprachstandard
 
 Alle Beispiele sind ANSI-C90-konform. Die Makefiles verwenden `-std=c90 -pedantic-errors`. In `extract-resource-cleanup` wird `sprintf` nur mit einem fest dimensionierten 64-Byte-Puffer und einem `int` verwendet; für allgemeine Formatierungsaufgaben ist eine begrenzte Ausgabe vorzuziehen, die C90 nicht standardisiert bereitstellt.
+
+## Unit-Tests (C90)
+
+Jedes Refactoring besitzt genau eine gemeinsame `test.c` im Themenverzeichnis. Diese Datei wird unverändert für `before` und `after` verwendet. Unterschiedliche APIs werden durch `before/test_adapter.h` und `after/test_adapter.h` angeglichen. Im jeweiligen Variantenverzeichnis `make test` ausführen. `make clean` entfernt auch die Testdateien. Tests verwenden nur C90 und die Standardbibliothek, kein externes Framework.

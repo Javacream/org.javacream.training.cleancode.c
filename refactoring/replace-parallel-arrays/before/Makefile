@@ -20,4 +20,12 @@ run: $(TARGET)
 	./$(TARGET)
 
 clean:
-	rm -f $(OBJECTS) $(TARGET)
+	rm -f $(OBJECTS) $(TARGET) test_runner test-output.txt
+
+# Der gemeinsame Test liegt im uebergeordneten Refactoring-Verzeichnis.
+# main.c wird ueber test_adapter.h eingebunden; weitere Moduldateien werden gelinkt.
+TEST_MODULES := $(filter-out main.c,$(wildcard *.c))
+.PHONY: test
+test:
+	$(CC) $(CFLAGS) -I. ../test.c $(TEST_MODULES) $(LDFLAGS) -o test_runner $(LDLIBS) -lm
+	./test_runner

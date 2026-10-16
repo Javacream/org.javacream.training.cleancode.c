@@ -19,3 +19,14 @@ Welche Verbesserung gehört genau in diesen Block? Welche anderen Verbesserungen
 ## Metrikdiskussion
 
 Die zyklomatische Komplexität kann bei Guard Clauses unverändert bleiben. Für die Bewertung der Lesbarkeit zusätzlich Cognitive Complexity und die **heuristisch** ermittelte Verschachtelung im Qualitätsbericht betrachten. Letztere ist keine präzise Parser-Metrik.
+
+
+## Lernziel und Erfolgskriterien (Review-Ergänzung)
+
+**Lernziel:** Verschachtelung mit Guard Clauses reduzieren.
+
+**Verhaltensvertrag:** Fehlercodes und Versandkosten einschließlich ungültiger Versandart beibehalten.
+
+**Übung / Reflexion:** Zunächst Guard Clauses, dann switch; Grenzfälle separat prüfen.
+
+**Erfolgskriterium:** Der C90-Build funktioniert; die fachlich definierten Ergebnisse stimmen, und die Teilnehmenden können die gewählte Verbesserung begründen.

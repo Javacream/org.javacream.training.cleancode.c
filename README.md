@@ -81,3 +81,10 @@ Die Analyseberichte werden erst bei Ausführung erzeugt.
 ### Ergänzungen zur Qualitätsbewertung
 
 `analyze.py` zeigt zusätzlich Cognitive Complexity (Lizard-Erweiterung) und eine als **Heuristik** gekennzeichnete Verschachtelungstiefe. In Block 07 liefert `make coverage` (nur `clean`) einen `gcov`-Bericht. Die Dirty-Variante hat dort keine Testsuite; es wird kein vergleichbarer Coverage-Wert behauptet.
+
+
+## Review-Ergänzungen
+
+- [Code Smells und Refactoring-Techniken](CODE-SMELL-REFACTORING-MATRIX.md)
+- [Umgesetzte Maßnahmen A und B](AENDERUNGEN-A-B.md)
+- [Refactoring-Übungen](refactoring/README.md)

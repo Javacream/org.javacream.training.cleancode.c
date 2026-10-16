@@ -15,12 +15,12 @@ int main(void)
     failures += assert_equal("zero net", 0, calculate_gross_price(0, 19));
     failures += assert_equal("maximum tax", 200, calculate_gross_price(100, 100));
     failures += assert_equal("rounding down", 102, calculate_gross_price(101, 1));
-    failures += assert_equal("negative net", -1, calculate_gross_price(-1, 19));
-    failures += assert_equal("negative tax", -1, calculate_gross_price(100, -1));
-    failures += assert_equal("tax above 100", -1, calculate_gross_price(100, 101));
+    failures += assert_equal("negative net preserves original", -1, calculate_gross_price(-1, 19));
+    failures += assert_equal("negative tax preserves original", 99, calculate_gross_price(100, -1));
+    failures += assert_equal("tax above 100 preserves original", 201, calculate_gross_price(100, 101));
     failures += assert_equal("one cent", 1, calculate_gross_price(1, 19));
     failures += assert_equal("one cent at 100 percent", 2, calculate_gross_price(1, 100));
-    failures += assert_equal("rounding at boundary", 119, calculate_gross_price(100, 19));
+    failures += assert_equal("rounding boundary", 202, calculate_gross_price(199, 2));
     failures += assert_equal("tax exactly 100", 246, calculate_gross_price(123, 100));
     return failures ? 1 : 0;
 }

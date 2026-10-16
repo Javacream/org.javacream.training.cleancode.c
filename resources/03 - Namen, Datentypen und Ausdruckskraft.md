@@ -29,3 +29,14 @@ make
 ```
 
 Die Bedingungen sind nun nicht mehr aufgrund fest kodierter Werte konstant wahr. **Der Schwerpunkt bleibt auf Namen und Typen**, nicht auf Funktionszerlegung oder Komplexitätsoptimierung.
+
+
+## Lernziel und Erfolgskriterien (Review-Ergänzung)
+
+**Lernziel:** Fachliche Zustände mit C90-Typen ausdrücken.
+
+**Verhaltensvertrag:** Die Versandbereitschaft muss für alle zulässigen Eingaben unverändert bleiben.
+
+**Übung / Reflexion:** Enum für Versandstatus; boolesche Aussagen als int in C90, positiv benennen.
+
+**Erfolgskriterium:** Der C90-Build funktioniert; die fachlich definierten Ergebnisse stimmen, und die Teilnehmenden können die gewählte Verbesserung begründen.

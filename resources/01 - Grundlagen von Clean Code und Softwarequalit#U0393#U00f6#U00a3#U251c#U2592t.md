@@ -127,3 +127,14 @@ Coding Conventions, Code Reviews, automatisierte Tests, statische Analyse, Refac
 ## 5. Kernaussagen
 
 Funktional korrekter Code ist nicht automatisch guter Code. Langfristige Wartbarkeit hängt auch von Architektur, Tests und nachvollziehbaren Entscheidungen ab. Technische Schulden können bewusst oder unbeabsichtigt entstehen; ADRs machen die Gründe, Alternativen und Konsequenzen wichtiger Architekturentscheidungen transparent. Selbstdokumentierender Code reduziert erklärende Implementierungsdokumentation, ersetzt aber keine Dokumentation wesentlicher Entscheidungen. Qualität wird kontinuierlich im Team entwickelt.
+
+
+## Lernziel und Erfolgskriterien (Review-Ergänzung)
+
+**Lernziel:** Sprechende Namen, Konstanten und Funktionsgrenzen.
+
+**Verhaltensvertrag:** Der Code soll dieselbe Preisberechnung liefern; Funktionszerlegung ist kein Selbstzweck.
+
+**Übung / Reflexion:** Prüfen, ob ein Funktionsname eine zusätzliche Abstraktion rechtfertigt.
+
+**Erfolgskriterium:** Der C90-Build funktioniert; die fachlich definierten Ergebnisse stimmen, und die Teilnehmenden können die gewählte Verbesserung begründen.

@@ -15,3 +15,14 @@ Markieren Sie Smells und bewerten Sie Auswirkung und Priorität. Vergleichen Sie
 ## Reflexion
 
 Welche Verbesserung gehört genau in diesen Block? Welche anderen Verbesserungen würden einen späteren Lernschwerpunkt vorwegnehmen?
+
+
+## Lernziel und Erfolgskriterien (Review-Ergänzung)
+
+**Lernziel:** Code Smells erkennen und priorisieren.
+
+**Verhaltensvertrag:** Erkennung und Entfernung von redundantem Code darf das Bestellverhalten nicht verändern.
+
+**Übung / Reflexion:** Smells nach Risiko, Häufigkeit und Aufwand priorisieren; passende Refactorings zuordnen.
+
+**Erfolgskriterium:** Der C90-Build funktioniert; die fachlich definierten Ergebnisse stimmen, und die Teilnehmenden können die gewählte Verbesserung begründen.

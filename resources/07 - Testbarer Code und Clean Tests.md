@@ -27,3 +27,14 @@ make coverage
 `make coverage` kompiliert eine instrumentierte Testanwendung und erzeugt mit `gcov` einen Bericht zur Ausführung von Zeilen und Zweigen in `logic.c`. Die Dirty-Variante besitzt bewusst keine Testsuite; sie erhält daher **keinen künstlichen Coverage-Wert**. Coverage ist keine Aussage über Testqualität.
 
 Diskutieren Sie Grenzwerte, ungültige Eingaben und die Aussagekraft der Assertions.
+
+
+## Lernziel und Erfolgskriterien (Review-Ergänzung)
+
+**Lernziel:** Fachlogik von I/O und globalem Zustand trennen.
+
+**Verhaltensvertrag:** Die reine Berechnung übernimmt zunächst auch ungewöhnliche, aber definierte Eingaben; Validierung ist eine getrennte fachliche Änderung.
+
+**Übung / Reflexion:** Integer-Überlauf vermeiden bzw. als eigenständiges Fehlerbehandlungsthema diskutieren.
+
+**Erfolgskriterium:** Der C90-Build funktioniert; die fachlich definierten Ergebnisse stimmen, und die Teilnehmenden können die gewählte Verbesserung begründen.

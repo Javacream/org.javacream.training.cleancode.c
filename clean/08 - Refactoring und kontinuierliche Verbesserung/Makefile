@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -std=c90 -Wall -Wextra -pedantic -g
+CFLAGS = -std=c90 -Wall -Wextra -pedantic-errors -g
 
 .PHONY: all clean check
 all: app tests

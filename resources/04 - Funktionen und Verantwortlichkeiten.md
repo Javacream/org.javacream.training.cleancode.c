@@ -15,3 +15,14 @@ Untersuchen Sie Verantwortlichkeiten und die Rolle des Schalters `print_details`
 ## Reflexion
 
 Welche Verbesserung gehört genau in diesen Block? Welche anderen Verbesserungen würden einen späteren Lernschwerpunkt vorwegnehmen?
+
+
+## Lernziel und Erfolgskriterien (Review-Ergänzung)
+
+**Lernziel:** Validierung, Berechnung und Ausgabe trennen.
+
+**Verhaltensvertrag:** print_details muss sowohl bei 0 als auch 1 unverändert wirken.
+
+**Übung / Reflexion:** Ausgabeoption erhalten; reine Berechnung separat testen.
+
+**Erfolgskriterium:** Der C90-Build funktioniert; die fachlich definierten Ergebnisse stimmen, und die Teilnehmenden können die gewählte Verbesserung begründen.

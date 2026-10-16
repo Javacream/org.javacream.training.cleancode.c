@@ -2,33 +2,6 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "type": "cppbuild",
-      "label": "C/C++: gcc build active file",
-      "command": "/usr/bin/gcc",
-      "args": [
-        "-fdiagnostics-color=always",
-        "-std=c90",
-        "-pedantic",
-        "-Wall",
-        "-Wextra",
-        "-g",
-        "${file}",
-        "-o",
-        "${fileDirname}/${fileBasenameNoExtension}"
-      ],
-      "options": {
-        "cwd": "${fileDirname}"
-      },
-      "problemMatcher": [
-        "$gcc"
-      ],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "detail": "C90 build using GCC"
-    },
-    {
       "label": "Static Analysis: cppcheck active file",
       "type": "shell",
       "command": "cppcheck --enable=warning,style,performance,portability --std=c89 \"${file}\"",
@@ -58,7 +31,7 @@
     {
       "label": "Metrics: check installed tools",
       "type": "shell",
-      "command": "gcc --version | head -n 1 && cppcheck --version && python3 -m pip show lizard | grep Version",
+      "command": "gcc --version | head -n 1 && cppcheck --version && lizard --version",
       "options": {
         "cwd": "${workspaceFolder}"
       },
@@ -75,7 +48,11 @@
       "problemMatcher": [
         "$gcc"
       ],
-      "detail": "Run Makefile in the directory of the active file"
+      "detail": "Run Makefile in the directory of the active file",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
     },
     {
       "label": "Make: Run",
@@ -104,6 +81,18 @@
       },
       "problemMatcher": [],
       "detail": "Run Makefile in the directory of the active file"
+    },
+    {
+      "label": "Make: Test",
+      "type": "shell",
+      "command": "make check",
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "detail": "Run check target for the active example"
     }
   ]
 }

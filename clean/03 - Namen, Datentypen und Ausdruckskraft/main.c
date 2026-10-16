@@ -1,11 +1,10 @@
 #include <stdio.h>
-#include <stdbool.h>
 typedef enum { SHIPMENT_CREATED, SHIPMENT_PACKED, SHIPMENT_SENT } ShipmentStatus;
 int main(int argc, char *argv[])
 {
     int input_status, input_paid, input_invalid_address, input_id;
     ShipmentStatus status;
-    bool payment_received, address_invalid;
+    int payment_received, address_valid;
     unsigned int shipment_id;
     if (argc != 5 || sscanf(argv[1], "%d", &input_status) != 1 ||
         sscanf(argv[2], "%d", &input_paid) != 1 ||
@@ -19,9 +18,9 @@ int main(int argc, char *argv[])
     }
     status = (ShipmentStatus)input_status;
     payment_received = input_paid != 0;
-    address_invalid = input_invalid_address != 0;
+    address_valid = input_invalid_address == 0;
     shipment_id = (unsigned int)input_id;
-    if (status == SHIPMENT_SENT && payment_received && !address_invalid)
+    if (status == SHIPMENT_SENT && payment_received && address_valid)
         printf("Shipment %u: ready\n", shipment_id);
     else
         printf("Shipment %u: not ready\n", shipment_id);

@@ -1,5 +1,5 @@
 #include <stdio.h>
-typedef struct { const char *customer; int unit_price; int quantity; int premium; int shipping_fee; } Order;
+typedef struct { const char *customer; int unit_price; int quantity; int premium; int print_details; int shipping_fee; } Order;
 static int is_valid_order(const Order *order) { return order->quantity > 0; }
 static int calculate_total(const Order *order)
 {
@@ -9,7 +9,7 @@ static int calculate_total(const Order *order)
 }
 static void print_receipt(const Order *order, int total)
 {
-    printf("Customer: %s\n", order->customer);
+    if (order->print_details) printf("Customer: %s\n", order->customer);
     printf("Total: %d\n", total);
     if (total > 500) printf("Large order\n");
 }
@@ -20,7 +20,7 @@ static void process_order(const Order *order)
 }
 int main(void)
 {
-    Order order = { "Miller", 120, 5, 1, 10 };
+    Order order = { "Miller", 120, 5, 1, 1, 10 };
     process_order(&order);
     return 0;
 }

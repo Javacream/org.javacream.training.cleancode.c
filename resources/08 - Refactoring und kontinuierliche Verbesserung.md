@@ -15,3 +15,14 @@ Führen Sie zuerst `make check` in dirty aus, refaktorieren Sie in kleinen Schri
 ## Reflexion
 
 Welche Verbesserung gehört genau in diesen Block? Welche anderen Verbesserungen würden einen späteren Lernschwerpunkt vorwegnehmen?
+
+
+## Lernziel und Erfolgskriterien (Review-Ergänzung)
+
+**Lernziel:** Kleine verhaltensneutrale Schritte ausführen.
+
+**Verhaltensvertrag:** Nach jedem Refactoring bleibt die Bestellberechnung gleich.
+
+**Übung / Reflexion:** Schritte einzeln durchführen, nach jedem Schritt Tests starten und Änderungen begründen.
+
+**Erfolgskriterium:** Der C90-Build funktioniert; die fachlich definierten Ergebnisse stimmen, und die Teilnehmenden können die gewählte Verbesserung begründen.

@@ -44,3 +44,14 @@ Der Bericht ist **kein Qualitätsscore**. Weder Architekturentscheidungen noch s
 ## Interpretation auf Funktionsebene
 
 Vergleichen Sie nicht nur die maximalen Werte pro Block, sondern einzelne Funktionen. Eine Aufteilung in mehrere Funktionen kann den Maximalwert senken, ohne die fachliche Komplexität zu beseitigen. Diskutieren Sie ausdrücklich den Fall Block 05: gleiche CCN, möglicherweise geringere kognitive Belastung.
+
+
+## Lernziel und Erfolgskriterien (Review-Ergänzung)
+
+**Lernziel:** Metriken kritisch interpretieren.
+
+**Verhaltensvertrag:** dirty, clean und alternative müssen dieselbe Risikobewertung ergeben.
+
+**Übung / Reflexion:** make compare ausführen und Komplexität gegen Lesbarkeit diskutieren.
+
+**Erfolgskriterium:** Der C90-Build funktioniert; die fachlich definierten Ergebnisse stimmen, und die Teilnehmenden können die gewählte Verbesserung begründen.
