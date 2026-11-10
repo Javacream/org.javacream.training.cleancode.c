@@ -1,3 +1,19 @@
+# Durchführung für Giesecke+Devrient vom 11.11.2026 – 12.11.2026
+
+* Referent
+
+  * Rainer Sawitzki  
+  * [rainer.sawitzki@gmail.com](mailto:rainer.sawitzki@gmail.com)  
+* Seminarzeiten:
+
+  * 9:00 \- 16:15 mit Pausen 10:30 \- 10:45, 12:15 \- 13:00 und 14:30-14:45  
+* Ablauf
+
+  * Seminarbeginn 15 min Warm Up, Vorstellung des Seminartages, Umgebung hochfahren, ...  
+  * Seminarende 15 min Cool Down, Zusammenfassung, bei Bedarf Übungen fertigstellen, Fragen, Wünsche...  
+* [Digitales Flipchart](https://docs.google.com/presentation/d/1tUitBZc7ajzG9lSQ55LfAKRKz9apNTGAasamo4LGK9I/edit)
+---
+
 # Clean Code – Trainingsübungen in C90
 
 Dieses Paket enthält die Übungsprogramme für das zweitägige Clean-Code-Seminar.
