@@ -37,3 +37,13 @@ make coverage
 
 ## Reflexion
 Welche Testfälle wären für Grenzwerte besonders wichtig? Wie ließe sich ein möglicher Integer-Überlauf behandeln, ohne ihn als reines Refactoring auszugeben?
+
+## Ergänzende Implementierungsübung: Rechteck
+
+Im Verzeichnis [`exercise/`](exercise/) liegt eine von Beginn an sauber strukturierte C90-Anwendung zur Berechnung von Fläche und Umfang eines Rechtecks. `main` verwendet `a = 5` und `b = 37` (Fläche **185**, Umfang **84**). Die Berechnungen befinden sich in einem eigenen Modul und werden unabhängig von der Konsolenausgabe getestet.
+
+```sh
+cd exercise
+make run
+make test
+```
