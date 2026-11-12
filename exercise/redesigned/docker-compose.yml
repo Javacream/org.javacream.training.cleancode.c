@@ -9,7 +9,12 @@ services:
       - "127.0.0.1:5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./doc/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - type: bind
+        source: ./doc/schema.sql
+        target: /docker-entrypoint-initdb.d/01-schema.sql
+        read_only: true
+        bind:
+          create_host_path: false
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U orders -d orders"]
       interval: 5s
