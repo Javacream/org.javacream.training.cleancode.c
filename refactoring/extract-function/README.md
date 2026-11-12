@@ -5,7 +5,8 @@
 Nach dieser Übung können die Teilnehmenden:
 - die beiden Berechnungsverantwortlichkeiten im Ausgangscode lokalisieren;
 - einen Funktionsnamen sowie Ein- und Ausgaben für den extrahierten Schritt begründen;
-- die Rechenergebnisse vor und nach der Extraktion anhand der gemeinsamen Tests vergleichen.
+- die Rechenergebnisse vor und nach der Extraktion anhand der gemeinsamen Tests vergleichen;
+- den Gewinn an Testgranularität durch zwei zusätzliche Tests der extrahierten Funktion erläutern.
 
 ## Fachlicher Hintergrund und Abgrenzung
 
@@ -23,6 +24,7 @@ Die Technik ist eine mögliche Antwort auf ein konkretes Problem, keine allgemei
 - [`after/`](after/): Referenzimplementierung.
 - [`test.c`](test.c): gemeinsame Verhaltenstests, die **unverändert** für beide Varianten eingesetzt werden.
 - `before/test_adapter.h` und `after/test_adapter.h`: Anpassung unterschiedlicher Schnittstellen an die gemeinsamen Tests.
+- [`after/additional_tests/`](after/additional_tests/): zwei zusätzliche Tests der extrahierten Funktion `subtotal()`; ausschließlich in der After-Variante.
 
 Die gemeinsamen Tests prüfen ausgewählte fachliche Ergebnisse und Randfälle; sie beweisen keine vollständige Verhaltensäquivalenz. Änderungen an öffentlichen APIs, neuen Eigenschaften oder Fehlerverträgen müssen zusätzlich ausdrücklich bewertet und gegebenenfalls durch eigene Vertragstests abgesichert werden.
 
@@ -33,13 +35,15 @@ Die gemeinsamen Tests prüfen ausgewählte fachliche Ergebnisse und Randfälle; 
 3. Entscheiden Sie, ob die vorgeschlagene Technik für dieses Beispiel angemessen ist. Begründen Sie Ihre Wahl.
 4. Führen Sie die Transformation in einer eigenen Arbeitskopie in kleinen, überprüfbaren Schritten durch. Vergleichen Sie erst anschließend mit `after`.
 5. Führen Sie im Verzeichnis `after` `make test` aus. Prüfen Sie zusätzliche API-Verträge dort, wo die Implementierung dafür eigene Tests vorsieht.
-6. Vergleichen Sie Verständlichkeit, Abhängigkeiten, Schnittstellen und Risiken der beiden Varianten.
+6. Prüfen Sie die beiden zusätzlichen Testfälle in `after/additional_tests/`. Erklären Sie, warum die `static`-Funktion im Test erreichbar ist, ohne Teil der öffentlichen API zu werden.
+7. Vergleichen Sie Verständlichkeit, Abhängigkeiten, Schnittstellen und Risiken der beiden Varianten.
 
 ## Erfolgskriterien
 
 - Das Ausgangsproblem ist an mindestens einer konkreten Codefundstelle erklärt.
 - Die gewählte Transformation ist anhand des Problems begründet; mögliche Nachteile sind benannt.
 - Beide Varianten lassen sich im C90-Modus bauen und bestehen ihre vorhandenen gemeinsamen Verhaltenstests.
+- Die extrahierte Funktion wird mit zwei zusätzlichen Tests direkt geprüft (mehrere Preise und leere Liste).
 - Die für dieses Beispiel relevante fachliche oder technische Besonderheit wird nachvollziehbar erläutert.
 - Etwaige API- oder Vertragsänderungen werden **nicht** als rein verhaltensneutrales Refactoring dargestellt.
 
@@ -56,5 +60,7 @@ make
 make test
 make clean
 ```
+
+In `after` führt `make test` zunächst die unveränderten gemeinsamen Regressionstests und anschließend die zusätzlichen Tests von `subtotal()` aus. Die Testdatei bindet `main.c` mit umbenanntem Einstiegspunkt ein; damit bleibt die `static`-Funktion gekapselt.
 
 Die Makefiles verwenden C90-Compileroptionen. `make test` führt die vorhandenen Tests aus; `make clean` entfernt erzeugte Build-Artefakte. Die Beispiele sind didaktisch reduziert und keine produktionsfertigen Bibliotheken.
